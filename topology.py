@@ -17,15 +17,34 @@ class MyTopo( Topo ):
         "Create custom topo."
 
         # Add hosts and switches
-        leftHost = self.addHost( 'h1' )
-        rightHost = self.addHost( 'h2' )
-        leftSwitch = self.addSwitch( 's3' )
-        rightSwitch = self.addSwitch( 's4' )
+      
+        for i in range(3):
+            sconfig = {"dpid": "%016x" % (i + 1)}
+            self.addSwitch("s%d" % (i + 1))
+            
+        for i in range(11):
+            self.addHost("h%d" % (i + 1))
+
 
         # Add links
-        self.addLink( leftHost, leftSwitch )
-        self.addLink( leftSwitch, rightSwitch )
-        self.addLink( rightSwitch, rightHost )
+        # Add router link
+        self.addLink("s1", "s2")
+        self.addLink("s1", "s3")
+        self.addLink("s2", "s3")
+
+        # Add clients-switch links
+        self.addLink("h1", "s1")
+        self.addLink("h2", "s1")
+        self.addLink("h3", "s1")
+        self.addLink("h4", "s1")
+        self.addLink("h5", "s1")
+        self.addLink("h6", "s2")
+        self.addLink("h7", "s2")
+        self.addLink("h8", "s2")
+        self.addLink("h9", "s3")
+        self.addLink("h10", "s3")
+        self.addLink("h11", "s3")
+
 
 
 topos = { 'mytopo': ( lambda: MyTopo() ) }
@@ -55,7 +74,7 @@ if __name__ == "__main__":
     
     # Here we automate the process of creating the 2 slices by calling as a subprocess the common_scenario.sh
     # Assumption: We begin with a non-emergency scenario.
-    subprocess.call("./common_scenario.sh")
+    #subprocess.call("./common_scenario.sh")
     
     CLI(net)
     net.stop()
