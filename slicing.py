@@ -24,16 +24,11 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:10": 4, "00:00:00:00:00:11": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2}
         }
         
-        self.emergency = 0          # Boolean that indicates the presence of an emergency scenario
-        self.time = time.time()     # Timer that keeps track of time for an emergency scenario
-        
-        self.print_flag = 0         # Helper variable that helps us with printing/output
-        
         # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
         # Listens to the timer() function.  
-        self.threadd = threading.Thread(target=self.timer, args=())
-        self.threadd.daemon = True
-        self.threadd.start()
+        # self.threadd = threading.Thread(target=self.timer, args=())
+        #self.threadd.daemon = True
+        #self.threadd.start()
 
         # Source Mapping        
         self.port_to_port = {
