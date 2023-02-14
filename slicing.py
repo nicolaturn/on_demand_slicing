@@ -37,13 +37,6 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2}
         }
         self.end_swtiches = [1, 7]
-
-
-
-
-
-if __name__ == "__main__":
-
 	print("Inserisci: (es. ON 1, OFF 2)")
 	var=input()
 	splitString=var.split(" ")
@@ -51,3 +44,60 @@ if __name__ == "__main__":
 	slice_number=int(splitString[1])
 	print("Status: ", status)
 	print("Number of Slice: ", slice_number)
+
+@set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
+    def switch_features_handler(self, ev):
+        datapath = ev.msg.datapath
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
+
+        # install the table-miss flow entry.
+        match = parser.OFPMatch()
+        actions = [
+            parser.OFPActionOutput(ofproto.OFPP_CONTROLLER, ofproto.OFPCML_NO_BUFFER)
+        ]
+        self.add_flow(datapath, 0, match, actions)
+
+    def add_flow(self, datapath, priority, match, actions):
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
+
+        # construct flow_mod message and send it.
+        inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)]
+        mod = parser.OFPFlowMod(
+            datapath=datapath, priority=priority, match=match, instructions=inst
+        )
+        datapath.send_msg(mod)
+
+    def _send_package(self, msg, datapath, in_port, actions):
+        data = None
+        ofproto = datapath.ofproto
+        if msg.buffer_id == ofproto.OFP_NO_BUFFER:
+            data = msg.data
+
+        out = datapath.ofproto_parser.OFPPacketOut(
+            datapath=datapath,
+            buffer_id=msg.buffer_id,
+            in_port=in_port,
+            actions=actions,
+            data=data,
+        )
+        datapath.send_msg(out)
+
+    @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
+    def _packet_in_handler(self, ev):
+        msg = ev.msg
+        datapath = msg.datapath
+        in_port = msg.match["in_port"]
+        dpid = datapath.id
+
+        out_port = self.slice_to_port[dpid][in_port]
+        actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
+        match = datapath.ofproto_parser.OFPMatch(in_port=in_port)
+
+        self.add_flow(datapath, 1, match, actions)
+        self._send_package(msg, datapath, in_port, actions)
+
+
+
+#if __name__ == "__main__":
