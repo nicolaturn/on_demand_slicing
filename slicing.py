@@ -37,7 +37,7 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2}
         }
 
-@set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
+    @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
         datapath = ev.msg.datapath
         ofproto = datapath.ofproto
