@@ -36,6 +36,7 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2}
         }
+	self.end_swtiches = [1, 7]
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
@@ -93,7 +94,6 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
 if __name__ == "__main__":
-	self.end_swtiches = [1, 7]
 	print("Inserisci: (es. ON 1, OFF 2)")
 	var=input()
 	splitString=var.split(" ")
