@@ -1,3 +1,4 @@
+#!/bin/sh
 # Permitting all hosts to communicate with each other
 sudo ovs-ofctl add-flow s1 in_port=3,nw_dst=10.0.0.6, actions=output:1
 sudo ovs-ofctl add-flow s1 in_port=3,nw_dst=10.0.0.7, actions=output:1
