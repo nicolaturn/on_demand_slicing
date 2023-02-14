@@ -26,9 +26,9 @@ class TrafficSlicing(app_manager.RyuApp):
         
         # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
         # Listens to the timer() function.  
-        # self.threadd = threading.Thread(target=self.timer, args=())
-        #self.threadd.daemon = True
-        #self.threadd.start()
+        self.threadd = threading.Thread(target=self.inserimento, args=())
+        self.threadd.daemon = True
+        self.threadd.start()
 
         # Source Mapping        
         self.port_to_port = {
@@ -93,7 +93,7 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
 
-if __name__ == "__main__":
+    def inserimento(self):
 	print("Inserisci: (es. ON 1, OFF 2)")
 	var=input()
 	splitString=var.split(" ")
