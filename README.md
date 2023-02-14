@@ -10,7 +10,7 @@ topology
 '''
 
 ## Project Description ##
-Initially, all hosts can communicate with each other and no slices are aveilable.
+Initially, all hosts can communicate with each other and no slices are available.
 
 ## How to run: ##
 
