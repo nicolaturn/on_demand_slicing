@@ -4,7 +4,7 @@ sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.6, actions=output:1
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.7, actions=output:1
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.8, actions=output:1
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.9, actions=output:2
-sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1nw_src=10.0.0.1,nw_dst=10.0.0.10, actions=output:2
+sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.10, actions=output:2
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.11, actions=output:2
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.2, actions=output:4
 sudo ovs-ofctl add-flow s1 nw_src=10.0.0.1,nw_dst=10.0.0.3, actions=output:5
