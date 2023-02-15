@@ -107,36 +107,28 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
     def inserimento(self):
-	while True:
-		print("Inserisci: (es. ON 1, OFF 2)")
-		var=input()
-		splitString=var.split(" ")
-		status=splitString[0]
-		slice_number=int(splitString[1])
-		print("Status: ", status)
-		print("Number of Slice: ", slice_number)
+        while True:
+                print("Inserisci: (es. ON 1, OFF 2)")
+                var=input()
+                splitString=var.split(" ")
+                status=splitString[0]
+                slice_number=int(splitString[1])
+                print("Status: ", status)
+                print("Number of Slice: ", slice_number)
 
-		if status=='ON':
-			match slice_number:
+                if status=='ON':
+                        match slice_number:
 
-			case 1:
+                        case 1:
 
-				print('                ***Activate Slice 1***                ')
-				subprocess.call("./slice1.sh")        # Creating the third slice
-
-
+                                print('                ***Activate Slice 1***                ')
+                                subprocess.call("./slice1.sh")        # Creating the third slice
+                        
 			case 2:
+                                print( "you will receive good news ")
+				
+                        case 3:
 
-				print( "you will receive good news ")
+                        case 4:
 
-			case 3:
-
-				print( "you will get a car")
-
-			case 4:
-
-				print( "you might face your fear this week")
-
-			case 5:
-
-				print( "you will get a pet")
+                        case 5:
