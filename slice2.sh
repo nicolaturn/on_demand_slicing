@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-echo '---------- Creating Slice 1 ----------'
+echo '---------- Creating Slice 2 ----------'
 echo 'Switch 1:'
 sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
