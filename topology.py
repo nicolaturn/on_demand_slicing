@@ -28,7 +28,7 @@ class MyTopo( Topo ):
             sconfig = {"dpid": "%016x" % (i + 1)}
             self.addSwitch("s%d" % (i + 1))
             
-        for i in range(11):
+        for i in range(9):
             self.addHost("h%d" % (i + 1))
 
 
@@ -48,8 +48,6 @@ class MyTopo( Topo ):
         self.addLink("h7", "s2")
         self.addLink("h8", "s2")
         self.addLink("h9", "s3")
-        self.addLink("h10", "s3")
-        self.addLink("h11", "s3")
 
 
 
