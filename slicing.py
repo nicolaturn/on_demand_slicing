@@ -95,7 +95,7 @@ class TrafficSlicing(app_manager.RyuApp):
         dst = eth.dst
         src = eth.src
 	
-	if dpid in self.mac_to_port:
+        if dpid in self.mac_to_port:
                 if dst in self.mac_to_port[dpid]:
                     out_port = self.mac_to_port[dpid][dst]
                     actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
