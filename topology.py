@@ -32,7 +32,7 @@ class MyTopo( Topo ):
       
         for i in range(3):
             sconfig = {"dpid": "%016x" % (i + 1)}
-            self.addSwitch("r%d" % (i + 1), **sconfig)
+            self.addSwitch("s%d" % (i + 1), **sconfig)
             
         for i in range(11):
             self.addHost("h%d" % (i + 1), **host_config)
