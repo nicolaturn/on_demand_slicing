@@ -119,16 +119,16 @@ class TrafficSlicing(app_manager.RyuApp):
                 if status=='ON':
                         match slice_number:
 
-                        case 1:
+                                case 1:
 
-                                print('                ***Activate Slice 1***                ')
-                                subprocess.call("./slice1.sh")        # Creating the third slice
+                                        print('                ***Activate Slice 1***                ')
+                                        subprocess.call("./slice1.sh")        # Creating the third slice
                         
-			case 2:
-                                print( "you will receive good news ")
+                                case 2:
+                                        print( "you will receive good news ")
 				
-                        case 3:
+                                case 3:
 
-                        case 4:
+                                case 4:
 
-                        case 5:
+                                case 5:
