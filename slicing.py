@@ -128,3 +128,4 @@ class TrafficSlicing(app_manager.RyuApp):
                         subprocess.call("./initial_scenario.sh")
                 else:
                         print(' !!ERROR - INSERT ON/OFF AND A NUMBER BETWEEN 1 AND 4!! ')
+                        print('ciao')
