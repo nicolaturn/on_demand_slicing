@@ -22,7 +22,7 @@ class TrafficSlicing(app_manager.RyuApp):
         self.mac_to_port = {
             1: {"00:00:00:00:00:01": 3, "00:00:00:00:00:02": 4, "00:00:00:00:00:03": 5, "00:00:00:00:00:04": 6, "00:00:00:00:00:05": 7, "00:00:00:00:00:06": 1, "00:00:00:00:00:07": 1, "00:00:00:00:00:08": 1, "00:00:00:00:00:09": 2, "00:00:00:00:00:10": 2, "00:00:00:00:00:11": 2},
             2: {"00:00:00:00:00:06": 3, "00:00:00:00:00:07": 4, "00:00:00:00:00:08": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:09": 2, "00:00:00:00:00:10": 2, "00:00:00:00:00:11": 2},
-	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:10": 4, "00:00:00:00:00:11": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2},
+	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2},
         }
         
         # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
@@ -35,9 +35,10 @@ class TrafficSlicing(app_manager.RyuApp):
         self.port_to_port = {
             1: {3:1, 4:1, 5:1, 6:1, 7:1, 3:2, 4:2, 5:2, 6:2, 7:2},
             2: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
-	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
+	    3: {3:1, 3:2},
         }
-        #self.end_switches = [1, 7]
+
+        #self.end_swtiches = [1, 7]
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
@@ -106,10 +107,36 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
     def inserimento(self):
-        print("Inserisci: (es. ON 1, OFF 2)")
-        var=input()
-        splitString=var.split(" ")
-        status=splitString[0]
-        slice_number=int(splitString[1])
-        print("Status: ", status)
-        print("Number of Slice: ", slice_number)
+	while True:
+		print("Inserisci: (es. ON 1, OFF 2)")
+		var=input()
+		splitString=var.split(" ")
+		status=splitString[0]
+		slice_number=int(splitString[1])
+		print("Status: ", status)
+		print("Number of Slice: ", slice_number)
+
+		if status=='ON':
+			match slice_number:
+
+			case 1:
+
+				print('                ***Activate Slice 1***                ')
+				subprocess.call("./slice1.sh")        # Creating the third slice
+
+
+			case 2:
+
+				print( "you will receive good news ")
+
+			case 3:
+
+				print( "you will get a car")
+
+			case 4:
+
+				print( "you might face your fear this week")
+
+			case 5:
+
+				print( "you will get a pet")
