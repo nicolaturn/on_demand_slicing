@@ -1,13 +1,3 @@
-"""Custom topology example
-
-Two directly connected switches plus a host for each switch:
-
-   host --- switch --- switch --- host
-
-Adding the 'topos' dict with a key/value pair to generate our newly defined
-topology enables one to pass in '--topo=mytopo' from the command line.
-"""
-
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.node import OVSKernelSwitch, RemoteController
@@ -24,7 +14,7 @@ class MyTopo( Topo ):
          
         # Create template host, switch, and link
         host_config = dict(inNamespace=True)
-        link_config = dict()  # Total Capacity of the link ~ 10Mbps
+        link_config = dict()
         host_link_config = dict()
  
 
@@ -86,7 +76,7 @@ if __name__ == "__main__":
     
     # Here we automate the process of creating the 2 slices by calling as a subprocess the common_scenario.sh
     # Assumption: We begin with a non-emergency scenario.
-    #subprocess.call("./initial_scenario.sh")
+    subprocess.call("./initial_scenario.sh")
     
     CLI(net)
     net.stop()
