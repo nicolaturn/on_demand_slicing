@@ -86,7 +86,7 @@ if __name__ == "__main__":
     
     # Here we automate the process of creating the 2 slices by calling as a subprocess the common_scenario.sh
     # Assumption: We begin with a non-emergency scenario.
-    #subprocess.call("./initial_scenario.sh")
+    subprocess.call("./initial_scenario.sh")
     
     CLI(net)
     net.stop()
