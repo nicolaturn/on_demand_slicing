@@ -29,7 +29,6 @@ class TrafficSlicing(app_manager.RyuApp):
         # Listens to the timer() function.  
         self.threadd = threading.Thread(target=self.inserimento, args=())
         self.threadd.daemon = True
-        self.threadd.start()
 
         # Source Mapping        
         self.port_to_port = {
@@ -37,6 +36,8 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
 	    3: {3:1, 3:2},
         }
+	
+	self.threadd.start()
 
         #self.end_swtiches = [1, 7]
 
