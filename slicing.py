@@ -82,7 +82,7 @@ class TrafficSlicing(app_manager.RyuApp):
     def _packet_in_handler(self, ev):
         msg = ev.msg
         datapath = msg.datapath
-	ofproto = datapath.ofproto
+        ofproto = datapath.ofproto
         in_port = msg.match["in_port"]
         dpid = datapath.id
 
