@@ -110,21 +110,21 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
     def inserimento(self):
-        while True:
+            while True:
                 print("Inserisci: (es. ON 1, OFF 2)")
-                var=input()
-                splitString=var.split(" ")
-                status=splitString[0]
-                slice_number=int(splitString[1])
+                var = input()
+                splitString = var.split(" ")
+                status = splitString[0]
+                slice_number = int(splitString[1])
                 print("Status: ", status)
                 print("Number of Slice: ", slice_number)
 
-                if status=='ON':
-                        if slice_number==1:
+                if status == 'ON':
+                        if slice_number == 1:
                                 print('                ***Activate Slice 1***                ')
-                                subprocess.call("./slice1.sh")        # Creating the first slice
-                elif status=='OFF':
-	                print('                ***De-Activate Slices***                ')
+                                subprocess.call("./slice1.sh")  # Creating the first slice
+                elif status == 'OFF':
+                        print('                ***De-Activate Slices***                ')
                         subprocess.call("./initial_scenario.sh")
                 else:
                         print(' !!ERROR - INSERT ON/OFF AND A NUMBER BETWEEN 1 AND 4!! ')
