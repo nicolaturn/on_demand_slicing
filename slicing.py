@@ -27,8 +27,8 @@ class TrafficSlicing(app_manager.RyuApp):
         
         # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
         # Listens to the timer() function.  
-        self.threadd = threading.Thread(target=self.inserimento, args=())
-        self.threadd.daemon = True
+        #self.threadd = threading.Thread(target=self.inserimento, args=())
+        #self.threadd.daemon = True
 
         # Source Mapping        
         self.port_to_port = {
@@ -37,7 +37,8 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 3:2},
         }
 	
-        self.threadd.start()
+        #self.threadd.start()
+	subprocess.call("./slice1.sh")
 
         #self.end_swtiches = [1, 7]
 
