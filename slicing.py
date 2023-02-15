@@ -115,11 +115,11 @@ class TrafficSlicing(app_manager.RyuApp):
                 var = input()
                 splitString = var.split(" ")
                 status = splitString[0]
-                slice_number = int(splitString[1])
-                print("Status: ", status)
-                print("Number of Slice: ", slice_number)
+                #print("Status: ", status)
+                #print("Number of Slice: ", slice_number)
 
                 if status == 'ON':
+                        slice_number = int(splitString[1])
                         if slice_number == 1:
                                 print('                ***Activate Slice 1***                ')
                                 subprocess.call("./slice1.sh")  # Creating the first slice
