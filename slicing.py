@@ -82,15 +82,26 @@ class TrafficSlicing(app_manager.RyuApp):
     def _packet_in_handler(self, ev):
         msg = ev.msg
         datapath = msg.datapath
+	ofproto = datapath.ofproto
         in_port = msg.match["in_port"]
         dpid = datapath.id
 
-        out_port = self.slice_to_port[dpid][in_port]
-        actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
-        match = datapath.ofproto_parser.OFPMatch(in_port=in_port)
-
-        self.add_flow(datapath, 1, match, actions)
-        self._send_package(msg, datapath, in_port, actions)
+        pkt = packet.Packet(msg.data)
+        eth = pkt.get_protocol(ethernet.ethernet)
+        if eth.ethertype == ether_types.ETH_TYPE_LLDP:
+            # ignore lldp packet
+            return
+        
+        dst = eth.dst
+        src = eth.src
+	
+	if dpid in self.mac_to_port:
+                if dst in self.mac_to_port[dpid]:
+                    out_port = self.mac_to_port[dpid][dst]
+                    actions = [datapath.ofproto_parser.OFPActionOutput(out_port)]
+                    match = datapath.ofproto_parser.OFPMatch(eth_dst=dst)
+                    self.add_flow(datapath, 1, match, actions)
+                    self._send_package(msg, datapath, in_port, actions)
 
 
 
