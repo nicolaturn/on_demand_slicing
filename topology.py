@@ -21,35 +21,41 @@ class MyTopo( Topo ):
 
     def build( self ):
         "Create custom topo."
+         
+        # Create template host, switch, and link
+        host_config = dict(inNamespace=True)
+        link_config = dict()  # Total Capacity of the link ~ 10Mbps
+        host_link_config = dict()
+ 
 
         # Add hosts and switches
       
         for i in range(3):
             sconfig = {"dpid": "%016x" % (i + 1)}
-            self.addSwitch("s%d" % (i + 1))
+            self.addSwitch("r%d" % (i + 1), **sconfig)
             
         for i in range(11):
-            self.addHost("h%d" % (i + 1))
+            self.addHost("h%d" % (i + 1), **host_config)
 
 
         # Add links
         # Add router link
-        self.addLink("s1", "s2")
-        self.addLink("s1", "s3")
-        self.addLink("s2", "s3")
+        self.addLink("s1", "s2",**link_config)
+        self.addLink("s1", "s3",**link_config)
+        self.addLink("s2", "s3",**link_config)
 
         # Add clients-switch links
-        self.addLink("h1", "s1")
-        self.addLink("h2", "s1")
-        self.addLink("h3", "s1")
-        self.addLink("h4", "s1")
-        self.addLink("h5", "s1")
-        self.addLink("h6", "s2")
-        self.addLink("h7", "s2")
-        self.addLink("h8", "s2")
-        self.addLink("h9", "s3")
-        self.addLink("h10", "s3")
-        self.addLink("h11", "s3")
+        self.addLink("h1", "s1", **host_link_config)
+        self.addLink("h2", "s1", **host_link_config)
+        self.addLink("h3", "s1", **host_link_config)
+        self.addLink("h4", "s1", **host_link_config)
+        self.addLink("h5", "s1", **host_link_config)
+        self.addLink("h6", "s2", **host_link_config)
+        self.addLink("h7", "s2", **host_link_config)
+        self.addLink("h8", "s2", **host_link_config)
+        self.addLink("h9", "s3", **host_link_config)
+        self.addLink("h10", "s3", **host_link_config)
+        self.addLink("h11", "s3", **host_link_config)
 
 
 
