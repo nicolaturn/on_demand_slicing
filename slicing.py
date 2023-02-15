@@ -38,7 +38,8 @@ class TrafficSlicing(app_manager.RyuApp):
         }
 	
         #self.threadd.start()
-        subprocess.call("./slice1.sh")
+        #subprocess.call("./slice1.sh")
+	inserimento(self)
 
         #self.end_swtiches = [1, 7]
 
@@ -122,3 +123,6 @@ class TrafficSlicing(app_manager.RyuApp):
                         if slice_number==1:
                                 print('                ***Activate Slice 1***                ')
                                 subprocess.call("./slice1.sh")        # Creating the first slice
+		else:
+	                print('                ***De-Activate Slices***                ')
+                        subprocess.call("./initial_scenario.sh")
