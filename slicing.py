@@ -39,7 +39,7 @@ class TrafficSlicing(app_manager.RyuApp):
 	
         #self.threadd.start()
         #subprocess.call("./slice1.sh")
-	inserimento(self)
+        inserimento(self)
 
         #self.end_swtiches = [1, 7]
 
