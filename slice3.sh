@@ -21,14 +21,12 @@ sudo ovs-vsctl set port s2-eth1 qos=@newqos -- \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
 --id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
-echo '---------- End Creating Sices ----------'
 
 sudo ovs-vsctl set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
 --id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
-echo '---------- End Creating Sices ----------'
 
 echo 'Switch3:'
 sudo ovs-vsctl set port s3-eth1 qos=@newqos -- \
@@ -36,7 +34,6 @@ sudo ovs-vsctl set port s3-eth1 qos=@newqos -- \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
 --id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
-echo '---------- End Creating Sices ----------'
 
 sudo ovs-vsctl set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
