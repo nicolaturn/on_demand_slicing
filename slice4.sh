@@ -15,7 +15,7 @@ sudo ovs-vsctl set port s3-eth2 qos=@newqos -- \
 other-config:max-rate=10000000 \
 queues:4=@4q -- \
 --id=@4q create queue other-config:min-rate=1000000 other-config:max-rate=60000000 
-echo '---------- End Creating Sices ----------'
+echo '---------- End Creating Sice ----------'
 
 #mapping s2 queues to hosts (h7 - h11)
 sudo ovs-ofctl add-flow s2 ip,priority=65500,nw_src=10.0.0.7,nw_dst=10.0.0.11,idle_timeout=0,actions=set_queue:4,normal
