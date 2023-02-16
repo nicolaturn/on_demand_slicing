@@ -7,7 +7,7 @@ sudo ovs-vsctl set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:4=@4q -- \
---id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=6000000
+--id=@4q create queue other-config:min-rate=1000000 other-config:max-rate=6000000
 
 echo 'Switch3:'
 sudo ovs-vsctl set port s3-eth2 qos=@newqos -- \
