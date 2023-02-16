@@ -119,7 +119,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 #print("Number of Slice: ", slice_number)
 		
 		
-                if (status !='on' or status !='On' or status !='ON' or status !='off' or status !='Off' or status !='OFF'):
+                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
                         print('Errore! Inserire ON o OFF')
                         continue
 			
