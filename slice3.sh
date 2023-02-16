@@ -4,7 +4,12 @@
 echo '---------- Creating Slice 3 ----------'
 echo 'Switch 1:'
 sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
-ovs-vsctl set port s1-eth1 qos=@newqos -- \
+--id=@newqos create QoS type=linux-htb \
+other-config:max-rate=10000000 \
+queues:3=@3q -- \
+--id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=4000000
+
+sudo ovs-vsctl set port s1-eth1 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
