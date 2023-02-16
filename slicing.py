@@ -124,7 +124,7 @@ class TrafficSlicing(app_manager.RyuApp):
                         continue
 			
                 if len(splitString)>1:
-		        slice_number = int(splitString[1])
+                        slice_number = int(splitString[1])
                         control=1
                         if slice_number < 1 or slice_number > 4:
                                 print('Il numero di slice deve essere compreso tra 1 e 4')
