@@ -119,12 +119,14 @@ class TrafficSlicing(app_manager.RyuApp):
                 #print("Number of Slice: ", slice_number)
 		
 		
-               if (status !='on' || status !='On || status !='ON' || status !='off' || status !='Off' || status!='OFF'):
-                       print('Errore! Inserire ON o OFF')
-                       continue
-                if slice_number <1 || slice_number >4 :
+                if (status !='on' or status !='On' or status !='ON' or status !='off' or status !='Off' or status !='OFF'):
+                        print('Errore! Inserire ON o OFF')
+                        continue
+			
+                if slice_number < 1 or slice_number > 4:
                         print('Il numero di slice deve essere compreso tra 1 e 4')
                         continue
+
 		
                 if status == 'ON':
                         slice_number = int(splitString[1])
