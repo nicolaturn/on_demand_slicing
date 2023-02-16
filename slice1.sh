@@ -15,7 +15,7 @@ sudo ovs-vsctl set port s2-eth1 qos=@newqos -- \
 other-config:max-rate=10000000 \
 queues:1=@1q -- \
 --id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=50000000 
-echo '---------- End Creating Sices ----------'
+echo '---------- End Creating Sice ----------'
 
 
 #mapping s1 queues to hosts (h1 - h6,h7,h8)
