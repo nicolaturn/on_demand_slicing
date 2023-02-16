@@ -117,18 +117,41 @@ class TrafficSlicing(app_manager.RyuApp):
                 status = splitString[0]
                 #print("Status: ", status)
                 #print("Number of Slice: ", slice_number)
-
-                if status == 'ON':
+                control=0
+		
+                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
+                        print('Errore! Inserire ON o OFF')
+                        continue
+			
+                if len(splitString)>1:
                         slice_number = int(splitString[1])
-                        if slice_number == 1:
-                                print('                ***Activate Slice 1***                ')
-                                subprocess.call("./slice1.sh")
-                        if slice_number == 2:
-                                print('                ***Activate Slice 2***                ')
-                                subprocess.call("./slice2.sh")
-                elif status == 'OFF':
-                        print('                ***De-Activate Slices***                ')
-                        subprocess.call("./initial_scenario.sh")
-                else:
-                        print(' !!ERROR - INSERT ON/OFF AND A NUMBER BETWEEN 1 AND 4!! ')
+                        control=1
+                        if slice_number < 1 or slice_number > 4:
+                                print('Il numero di slice deve essere compreso tra 1 e 4')
+                                continue
 
+		
+                if status == 'ON':
+                        if control==1:
+                                if slice_number == 1:
+                                        print('                ***Activate Slice 1***                ')
+                                        subprocess.call("./slice1.sh")
+                                if slice_number == 2:
+                                        print('                ***Activate Slice 2***                ')
+                                        subprocess.call("./slice2.sh")
+                                if slice_number == 3:
+                                        print('                ***Activate Slice 3***                ')
+                                        subprocess.call("./slice3.sh")
+                                if slice_number == 4:
+                                        print('                ***Activate Slice 4***                ')
+                                        subprocess.call("./slice4.sh")
+                        else:
+                                print('                ***Activate All Slices***                ')
+                                subprocess.call("./slice1.sh")
+                                subprocess.call("./slice2.sh")
+                                subprocess.call("./slice3.sh")
+                                subprocess.call("./slice4.sh")
+                elif status == 'OFF':
+                        if control==0:
+                                print('                ***De-Activate Slices***                ')
+                                subprocess.call("./initial_scenario.sh")
