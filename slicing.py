@@ -156,4 +156,4 @@ class TrafficSlicing(app_manager.RyuApp):
                                 print('                ***De-Activate Slices***                ')
                                 subprocess.call("./initial_scenario.sh")
                         else:
-                                print('                ***De-Activate Slice %d ***                ', slice_number)
+                                print('                ***De-Activate Slice ',slice_number,' ***                ')
