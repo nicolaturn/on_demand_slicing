@@ -1,3 +1,5 @@
+#!/bin/sh
+
 if [$1 == 1]
 then
    sudo ovs-vsctl destroy queue @1q
