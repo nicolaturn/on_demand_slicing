@@ -2,8 +2,8 @@
 
 if [ $1 = '1' ]
 then
-   sudo ovs-ofctl del-flows s1 priority=65500
-   sudo ovs-ofctl del-flows s2 priority=65500
+   sudo ovs-ofctl del-flows s1 "priority=65500"
+   sudo ovs-ofctl del-flows s2 "priority=65500"
 
    sudo ovs-ofctl delete-flows s2 "actions=slice1"
 fi
