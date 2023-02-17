@@ -2,7 +2,8 @@
 
 if [ $1 = '1' ]
 then
-   sudo ovs-vsctl -- destroy queue name=@1q
+   sudo ovs-ofctl delete-flows s1 "actions=slice1"
+   sudo ovs-ofctl delete-flows s2 "actions=slice1"
 fi
 
 if [ $1 = '2' ]
