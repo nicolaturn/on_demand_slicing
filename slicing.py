@@ -118,6 +118,8 @@ class TrafficSlicing(app_manager.RyuApp):
                 #print("Status: ", status)
                 #print("Number of Slice: ", slice_number)
                 control=0
+                active_slices = [False for _ in range(4)]
+                str_slice="./slice"
 		
                 if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
                         print('Errore! Inserire ON o OFF')
@@ -135,15 +137,19 @@ class TrafficSlicing(app_manager.RyuApp):
                         if control==1:
                                 if slice_number == 1:
                                         print('                ***Activate Slice 1***                ')
+                                        active_slices[0]=true;
                                         subprocess.call("./slice1.sh")
                                 if slice_number == 2:
                                         print('                ***Activate Slice 2***                ')
+                                        active_slices[1]=true;
                                         subprocess.call("./slice2.sh")
                                 if slice_number == 3:
                                         print('                ***Activate Slice 3***                ')
+                                        active_slices[2]=true;
                                         subprocess.call("./slice3.sh")
                                 if slice_number == 4:
                                         print('                ***Activate Slice 4***                ')
+                                        active_slices[3]=true;
                                         subprocess.call("./slice4.sh")
                         else:
                                 print('                ***Activate All Slices***                ')
@@ -152,9 +158,14 @@ class TrafficSlicing(app_manager.RyuApp):
                                 subprocess.call("./slice3.sh")
                                 subprocess.call("./slice4.sh")
                 elif status == 'OFF':
+                        subprocess.call("./initial_scenario.sh")
                         if control==0:
                                 print('                ***De-Activate Slices***                ')
-                                subprocess.call("./initial_scenario.sh")
+                                active_slices = [False for _ in range(4)]
                         else:
                                 print('                ***De-Activate Slice ',slice_number,' ***                ')
-                                subprocess.call(["./delete_slices.sh", str(slice_number)])
+                                active_slice[slice_number-1]=false
+                                for i in range(len(active_slices)):
+                                        if active_slices[i]:
+					        str_slice += str(i+1) + ".sh"
+                                                subprocess.call(str)
