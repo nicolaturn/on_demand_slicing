@@ -167,5 +167,5 @@ class TrafficSlicing(app_manager.RyuApp):
                                 active_slice[slice_number-1]=false
                                 for i in range(len(active_slices)):
                                         if active_slices[i]:
-					        str_slice += str(i+1) + ".sh"
+                                                str_slice += str(i+1) + ".sh"
                                                 subprocess.call(str)
