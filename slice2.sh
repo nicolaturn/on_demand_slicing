@@ -4,11 +4,9 @@
 if [ -z "$1" ]
 then
 echo '---------- Creating Slice 2 ----------'
-fi
-if [ -z "$1" ]
-then
 echo 'Switch 1:'
 fi
+
 sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
