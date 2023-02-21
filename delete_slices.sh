@@ -2,7 +2,8 @@
 
 if [ $1 = '1' ]
 then
-   sudo ovs-vsctl -- destroy queue name=@1q
+   sudo ovs-ofctl del-flows s1 metadata=0x736c696365310000
+   sudo ovs-ofctl del-flows s2 metadata=0x736c696365310000
 fi
 
 if [ $1 = '2' ]
