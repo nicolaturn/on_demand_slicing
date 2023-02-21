@@ -121,7 +121,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 control=0
 		#str_slice="./slice"
                 #active_slices = [False for _ in range(4)]
-                print(active_slices)
+                #print(active_slices)
 		
                 if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
                         print('Errore! Inserire ON o OFF')
