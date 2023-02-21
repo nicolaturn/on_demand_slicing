@@ -111,7 +111,6 @@ class TrafficSlicing(app_manager.RyuApp):
 
     def inserimento(self):
             active_slices = [False for _ in range(4)]
-            str_slice="./slice"
             while True:
                 print("Inserisci: (es. ON 1, OFF 2)")
                 var = input()
@@ -120,6 +119,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 #print("Status: ", status)
                 #print("Number of Slice: ", slice_number)
                 control=0
+		#str_slice="./slice"
                 #active_slices = [False for _ in range(4)]
                 print(active_slices)
 		
@@ -169,6 +169,7 @@ class TrafficSlicing(app_manager.RyuApp):
                                 print('        ***De-Activate Slice ',slice_number,' ***                ')
                                 active_slices[slice_number-1]=False
                                 for i in range(len(active_slices)):
+                                        str_slice="./slice"
                                         if active_slices[i]:
                                                 str_slice += str(i+1) + ".sh"
                                                 #print(str_slice)
