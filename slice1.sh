@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $1 != '1' ]
+if [ -n "$1" ] && [ $1 != '1' ]
 then
 echo '---------- Creating Slice 1 ----------'
 fi
@@ -19,7 +19,7 @@ other-config:max-rate=10000000 \
 queues:1=@1q -- \
 --id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=50000000 
 
-if [ $1 != '1' ]
+if [ -n "$1" ] && [ $1 != '1' ]
 then
 echo '---------- End Creating Sice ----------'
 fi
