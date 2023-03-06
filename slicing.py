@@ -155,11 +155,13 @@ class TrafficSlicing(app_manager.RyuApp):
                                         subprocess.call("./slice4.sh")
                         else:
                                 print('        ***Activate All Slices***                ')
-                                active_slices = [True for _ in range(4)]
-                                subprocess.call("./slice1.sh")
-                                subprocess.call("./slice2.sh")
-                                subprocess.call("./slice3.sh")
-                                subprocess.call("./slice4.sh")
+                                for i in range(len(active_slices)):
+                                        str_slice = "./slice"
+                                        if (not active_slices[i]):
+                                                str_slice += str(i+1) + ".sh"
+                                                active_slices[i] = True
+                                                subprocess.call([str_slice])
+
                 elif (status == 'OFF' or status =='off' or status =='Off'):
                         subprocess.call("./initial_scenario.sh")
                         if control==0:

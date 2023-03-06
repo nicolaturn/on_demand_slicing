@@ -3,7 +3,7 @@
 
 if [ -z "$1" ]
 then
-echo '---------- Creating Slice 1 ----------'
+echo '---------- Creating Slice 3 ----------'
 echo 'Switch 1:'
 fi
 sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
