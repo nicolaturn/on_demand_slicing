@@ -5,22 +5,23 @@ The goal of this project is to implement a network slicing approach to enable dy
 
 A multi-hop technology is used for this emulation --> there are 11 hosts (h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11) and 3 switches (s1,s2,s3) in the network:
 
-
+![](images/topology.PNG)
 
 ## Project Description ##
 Initially, all hosts can not communicate with each other and no slices are available.
-After that, you can decide to activate one, more or all slices by passing an ON command to the ryu controller, and you can deactivate them with an OFF command (see the how to run section).
+After that, you can decide to activate one, more or all slices by passing an ON command to the ryu controller, and you can deactivate them with an OFF command (see the [how to run section](How-to-run:)).
 
 The available slices are:
 
-	* slice 1
-		(foto slice 1)
-	* slice 2
-		(foto slice 2)
-	* slice 3
-		(foto slice 3)
-	* slice 4
-		(foto slice 4)
+* ### Slice 1 ###
+![](images/slice1.PNG)
+* ### Slice 2 ###
+![](images/slice2.PNG)
+* ### Slice 3 ###
+![](images/slice3.PNG)
+* ### Slice 4 ###
+![](images/slice4.PNG)
+
 ## How to run: ##
 1. Connect with a comnetsemu portale (recommended) or install all the functionalities in your system
 2. Open 2 tab
