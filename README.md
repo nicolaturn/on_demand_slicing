@@ -9,7 +9,7 @@ A multi-hop technology is used for this emulation --> there are 11 hosts (h1,h2,
 
 ## Project Description ##
 Initially, all hosts can not communicate with each other and no slices are available.
-After that, you can decide to activate one, more or all slices by passing an ON command to the ryu controller, and you can deactivate them with an OFF command (see the [how to run section](How-to-run:)).
+After that, you can decide to activate one, more or all slices by passing an ON command to the ryu controller, and you can deactivate them with an OFF command (see the [how to run section](#how-to-run)).
 
 The available slices are:
 
@@ -28,6 +28,7 @@ This folder contains the following files:
 * initial_scenerio.sh -> bash script that deny hosts to communicate with each other.
 * slice1.sh, slice2.sh, slice3.sh, slice4.sh -> bash scripts that build virtual queues that are used for communication between hosts.
 
+<a name="how-to-run"></a>
 ## How to run: ##
 1. Connect with a comnetsemu portale (recommended) or install all the functionalities in your system
 2. Open 2 tab
