@@ -10,7 +10,24 @@ topology
 '''
 
 ## Project Description ##
-Initially, all hosts can communicate with each other and no slices are available.
-
+Initially, all hosts can not communicate with each other and no slices are available.
+After that, you can decide to activate one, more or all slices by passing an ON command to the ryu controller, and you can deactivate them with an OFF command (see the how to run section).
+The available slices are:
+	-slice 1
+	(foto slice 1)
+	-slice 2
+	(foto slice 2)
+	-slice 3
+	(foto slice 3)
+	-slice 4
+	(foto slice 4)
 ## How to run: ##
-
+Connect with a comnetsemu portale (recommended) or install all the functionalities in your system.
+Open 2 tab.
+ryu-manager slicing.py to run the controller
+sudo python3 topology.py to emulate the topology with mininet
+insert ON and OFF command in the ryu controller tab
+	write ON to activate all slices
+	write ON n to activate only slice n (with n between 1 and 4)
+	write OFF to de-activate all slices
+	write OFF n to de-activate only slice n (with n between 1 and 4)
