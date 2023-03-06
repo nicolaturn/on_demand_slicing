@@ -1,7 +1,7 @@
 # On_demand_slicing - NetworkingII Activity Project #
 
 ## Introduction ##
-The goal of this project is to implement a network slicing approach to enable dynamic activation/de-activation of network slices via CLI/GUI commands within Comnetsemu enviroment. The original Comnetsemu source code with all the detailed examples can be found [here](https://git.comnets.net/public-repo/comnetsemu.git).
+The goal of this project is to implement a network slicing approach to enable dynamic activation/de-activation of network slices via CLI commands within Comnetsemu enviroment. The original Comnetsemu source code with all the detailed examples can be found [here](https://git.comnets.net/public-repo/comnetsemu.git).
 
 A multi-hop technology is used for this emulation --> there are 11 hosts (h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11) and 3 switches (s1,s2,s3) in the network:
 
@@ -21,6 +21,12 @@ The available slices are:
 ![](images/slice3.PNG)
 * ### Slice 4 ###
 ![](images/slice4.PNG)
+
+This folder contains the following files:
+* topology.py -> python script to build the network as shown in the previous image.
+* slicing.py -> python script that permits to activate/de-activate slices via CLI commands.
+* initial_scenerio.sh -> bash script that deny hosts to communicate with each other.
+* slice1.sh, slice2.sh, slice3.sh, slice4.sh -> bash scripts that build virtual queues that are used for communication between hosts.
 
 ## How to run: ##
 1. Connect with a comnetsemu portale (recommended) or install all the functionalities in your system
