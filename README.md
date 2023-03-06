@@ -28,7 +28,7 @@ This folder contains the following files:
 * initial_scenerio.sh -> bash script that deny hosts to communicate with each other.
 * slice1.sh, slice2.sh, slice3.sh, slice4.sh -> bash scripts that build virtual queues that are used for communication between hosts.
 
-## How to run: ##
+<a name="How-to-run">## How to run: ##</a>
 1. Connect with a comnetsemu portale (recommended) or install all the functionalities in your system
 2. Open 2 tab
 3. Run the controller
