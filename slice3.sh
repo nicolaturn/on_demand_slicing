@@ -26,13 +26,13 @@ sudo ovs-vsctl set port s2-eth1 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
---id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
+--id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=4000000 
 
 sudo ovs-vsctl set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
---id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
+--id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=4000000 
 
 if [ -z "$1" ]
 then
@@ -42,13 +42,13 @@ sudo ovs-vsctl set port s3-eth1 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
---id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
+--id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=4000000 
 
 sudo ovs-vsctl set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:3=@3q -- \
---id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
+--id=@3q create queue other-config:min-rate=1000000 other-config:max-rate=4000000 
 if [ -z "$1" ]
 then
 echo '---------- End Creating Sice ----------'
