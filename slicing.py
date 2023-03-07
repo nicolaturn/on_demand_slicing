@@ -24,11 +24,6 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {"00:00:00:00:00:06": 3, "00:00:00:00:00:07": 4, "00:00:00:00:00:08": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:09": 2, "00:00:00:00:00:0a": 2, "00:00:00:00:00:0b": 2},
 	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:0a": 4, "00:00:00:00:00:0b": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2},
         }
-        
-        # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
-        # Listens to the timer() function.  
-        #self.threadd = threading.Thread(target=self.inserimento, args=())
-        #self.threadd.daemon = True
 
         # Source Mapping        
         self.port_to_port = {
@@ -37,11 +32,7 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
         }
 	
-        #self.threadd.start()
-        #subprocess.call("./slice1.sh")
         self.inserimento()
-
-        #self.end_swtiches = [1, 7]
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
@@ -123,7 +114,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 #active_slices = [False for _ in range(4)]
                 #print(active_slices)
 		
-                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
+                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF' and status !='STAT'):
                         print('Errore! Inserire ON o OFF')
                         continue
 			
@@ -176,3 +167,5 @@ class TrafficSlicing(app_manager.RyuApp):
                                                 str_slice += str(i+1) + ".sh"
                                                 #print(str_slice)
                                                 subprocess.call([str_slice, str(1)])
+                elif (status == 'STAT' or status == 'stat' or status == 'Stat'):
+                        subprocess.call("./stats.sh")
