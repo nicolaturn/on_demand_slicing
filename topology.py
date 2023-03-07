@@ -58,13 +58,16 @@ if __name__ == "__main__":
         
         # We specify an external controller by passing the Controller object in the Mininet constructor
         # SOS Note: Do not specify port -- Default: 6653
-        controller=RemoteController( 'c0', ip='127.0.0.1'), 
+        #controller=RemoteController( 'c0', ip='127.0.0.1'), 
         switch=OVSKernelSwitch,
         build=False,
         autoSetMacs=True,
         autoStaticArp=True,
         link=TCLink,
     )
+
+    controller = RemoteController('c0', ip='127.0.0.1', port=6653)
+    net.addController(controller)
     
     net.build()
     net.start()
