@@ -1,21 +1,31 @@
 #!/bin/sh
 
 
+if [ -z "$1" ]
+then
 echo '---------- Creating Slice 2 ----------'
 echo 'Switch 1:'
+fi
+
 sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:2=@2q -- \
 --id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=4000000
 
-echo 'Switch3:'
+if [ -z "$1" ]
+then
+echo 'Switch 3:'
+fi
 sudo ovs-vsctl set port s3-eth1 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
 queues:2=@2q -- \
---id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=40000000 
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=4000000 
+if [ -z "$1" ]
+then
 echo '---------- End Creating Sice ----------'
+fi
 
 
 #mapping s1 queues to hosts (h4,h5 - h9,h10)

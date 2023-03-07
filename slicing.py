@@ -24,11 +24,6 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {"00:00:00:00:00:06": 3, "00:00:00:00:00:07": 4, "00:00:00:00:00:08": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:09": 2, "00:00:00:00:00:0a": 2, "00:00:00:00:00:0b": 2},
 	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:0a": 4, "00:00:00:00:00:0b": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2},
         }
-        
-        # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
-        # Listens to the timer() function.  
-        #self.threadd = threading.Thread(target=self.inserimento, args=())
-        #self.threadd.daemon = True
 
         # Source Mapping        
         self.port_to_port = {
@@ -37,11 +32,7 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
         }
 	
-        #self.threadd.start()
-        #subprocess.call("./slice1.sh")
         self.inserimento()
-
-        #self.end_swtiches = [1, 7]
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
@@ -110,6 +101,7 @@ class TrafficSlicing(app_manager.RyuApp):
 
 
     def inserimento(self):
+            active_slices = [False for _ in range(4)]
             while True:
                 print("Inserisci: (es. ON 1, OFF 2)")
                 var = input()
@@ -118,8 +110,11 @@ class TrafficSlicing(app_manager.RyuApp):
                 #print("Status: ", status)
                 #print("Number of Slice: ", slice_number)
                 control=0
+		#str_slice="./slice"
+                #active_slices = [False for _ in range(4)]
+                #print(active_slices)
 		
-                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF'):
+                if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF' and status !='stat' and status !='Stat' and status !='STAT'):
                         print('Errore! Inserire ON o OFF')
                         continue
 			
@@ -131,29 +126,46 @@ class TrafficSlicing(app_manager.RyuApp):
                                 continue
 
 		
-                if status == 'ON':
+                if (status == 'ON' or status =='on' or status =='On'):
                         if control==1:
                                 if slice_number == 1:
-                                        print('                ***Activate Slice 1***                ')
+                                        print('        ***Activate Slice 1***                ')
+                                        active_slices[0]=True;
                                         subprocess.call("./slice1.sh")
                                 if slice_number == 2:
-                                        print('                ***Activate Slice 2***                ')
+                                        print('        ***Activate Slice 2***                ')
+                                        active_slices[1]=True;
                                         subprocess.call("./slice2.sh")
                                 if slice_number == 3:
-                                        print('                ***Activate Slice 3***                ')
+                                        print('        ***Activate Slice 3***                ')
+                                        active_slices[2]=True;
                                         subprocess.call("./slice3.sh")
                                 if slice_number == 4:
-                                        print('                ***Activate Slice 4***                ')
+                                        print('        ***Activate Slice 4***                ')
+                                        active_slices[3]=True;
                                         subprocess.call("./slice4.sh")
                         else:
-                                print('                ***Activate All Slices***                ')
-                                subprocess.call("./slice1.sh")
-                                subprocess.call("./slice2.sh")
-                                subprocess.call("./slice3.sh")
-                                subprocess.call("./slice4.sh")
-                elif status == 'OFF':
+                                print('        ***Activate All Slices***                ')
+                                for i in range(len(active_slices)):
+                                        str_slice = "./slice"
+                                        if (not active_slices[i]):
+                                                str_slice += str(i+1) + ".sh"
+                                                active_slices[i] = True
+                                                subprocess.call([str_slice])
+
+                elif (status == 'OFF' or status =='off' or status =='Off'):
+                        subprocess.call("./initial_scenario.sh")
                         if control==0:
-                                print('                ***De-Activate Slices***                ')
-                                subprocess.call("./initial_scenario.sh")
+                                print('        ***De-Activate Slices***                ')
+                                active_slices = [False for _ in range(4)]
                         else:
-                                print('                ***De-Activate Slice ',slice_number,' ***                ')
+                                print('        ***De-Activate Slice ',slice_number,' ***                ')
+                                active_slices[slice_number-1]=False
+                                for i in range(len(active_slices)):
+                                        str_slice="./slice"
+                                        if active_slices[i]:
+                                                str_slice += str(i+1) + ".sh"
+                                                #print(str_slice)
+                                                subprocess.call([str_slice, str(1)])
+                elif (status == 'STAT' or status == 'stat' or status == 'Stat'):
+                        subprocess.call("./stats.sh")

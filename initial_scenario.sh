@@ -1,5 +1,5 @@
 #!/bin/sh
-# Permitting all hosts to communicate with each other
+# Deny all hosts to communicate with each other
 
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.1,nw_dst=10.0.0.6,idle_timeout=0,actions=drop
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.1,nw_dst=10.0.0.7,idle_timeout=0,actions=drop
