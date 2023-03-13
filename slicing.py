@@ -28,12 +28,9 @@ class TrafficSlicing(app_manager.RyuApp):
         
         
         self.print_flag = 0         # Helper variable that helps us with printing/output
-        
-        # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
-        # Listens to the timer() function.  
+          
         self.threadd = threading.Thread(target=self.inserimento, args=())
         self.threadd.daemon = True
-        #time.sleep(10)
         self.threadd.start()
 
         # Source Mapping        
@@ -120,12 +117,7 @@ class TrafficSlicing(app_manager.RyuApp):
                 var = input()
                 splitString = var.split(" ")
                 status = splitString[0]
-                #print("Status: ", status)
-                #print("Number of Slice: ", slice_number)
                 control=0
-		#str_slice="./slice"
-                #active_slices = [False for _ in range(4)]
-                #print(active_slices)
 		
                 if (status !='on' and status !='On' and status !='ON' and status !='off' and status !='Off' and status !='OFF' and status !='stat' and status !='Stat' and status !='STAT'):
                         print('Errore! Inserire ON o OFF')
