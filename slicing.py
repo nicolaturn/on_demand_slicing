@@ -32,7 +32,7 @@ class TrafficSlicing(app_manager.RyuApp):
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
         }
 	
-	self.threadd = threading.Thread(target=self.inserimento, args=())
+        self.threadd = threading.Thread(target=self.inserimento, args=())
         self.threadd.daemon = True
         self.threadd.start()
         #self.inserimento()
