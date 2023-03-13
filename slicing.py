@@ -30,7 +30,7 @@ class TrafficSlicing(app_manager.RyuApp):
         
         # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
         # Listens to the timer() function.  
-        self.threadd = threading.Thread(target=self.timer, args=())
+        self.threadd = threading.Thread(target=self.inserimento, args=())
         self.threadd.daemon = True
         self.threadd.start()
 
