@@ -11,6 +11,7 @@ from ryu.lib.packet import tcp
 from ryu.lib.packet import icmp
 import subprocess
 import threading
+import time
 
 class TrafficSlicing(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -32,6 +33,7 @@ class TrafficSlicing(app_manager.RyuApp):
         # Listens to the timer() function.  
         self.threadd = threading.Thread(target=self.inserimento, args=())
         self.threadd.daemon = True
+        #time.sleep(10)
         self.threadd.start()
 
         # Source Mapping        
@@ -113,6 +115,7 @@ class TrafficSlicing(app_manager.RyuApp):
     def inserimento(self):
             active_slices = [False for _ in range(4)]
             while True:
+                time.sleep(1)
                 print("Inserisci: (es. ON 1, OFF 2)")
                 var = input()
                 splitString = var.split(" ")
