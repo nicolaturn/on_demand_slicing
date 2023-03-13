@@ -11,6 +11,7 @@ from ryu.lib.packet import tcp
 from ryu.lib.packet import icmp
 import subprocess
 import threading
+import time
 
 class TrafficSlicing(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -24,6 +25,16 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {"00:00:00:00:00:06": 3, "00:00:00:00:00:07": 4, "00:00:00:00:00:08": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:09": 2, "00:00:00:00:00:0a": 2, "00:00:00:00:00:0b": 2},
 	    3: {"00:00:00:00:00:09": 3, "00:00:00:00:00:0a": 4, "00:00:00:00:00:0b": 5, "00:00:00:00:00:01": 1, "00:00:00:00:00:02": 1, "00:00:00:00:00:03": 1, "00:00:00:00:00:04": 1, "00:00:00:00:00:05": 1, "00:00:00:00:00:06": 2, "00:00:00:00:00:07": 2, "00:00:00:00:00:08": 2},
         }
+        
+        
+        self.print_flag = 0         # Helper variable that helps us with printing/output
+        
+        # Creation of an additional thread that automates the process for Emergecy Scenario and Normal Scenario!
+        # Listens to the timer() function.  
+        self.threadd = threading.Thread(target=self.inserimento, args=())
+        self.threadd.daemon = True
+        #time.sleep(10)
+        self.threadd.start()
 
         # Source Mapping        
         self.port_to_port = {
@@ -31,8 +42,8 @@ class TrafficSlicing(app_manager.RyuApp):
             2: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
 	    3: {3:1, 4:1, 5:1, 3:2, 4:2, 5:2},
         }
-	
-        self.inserimento()
+        
+
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
@@ -73,13 +84,13 @@ class TrafficSlicing(app_manager.RyuApp):
         )
         datapath.send_msg(out)
 
+
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
         msg = ev.msg
         datapath = msg.datapath
         ofproto = datapath.ofproto
         in_port = msg.match["in_port"]
-        dpid = datapath.id
 
         pkt = packet.Packet(msg.data)
         eth = pkt.get_protocol(ethernet.ethernet)
@@ -89,7 +100,9 @@ class TrafficSlicing(app_manager.RyuApp):
         
         dst = eth.dst
         src = eth.src
-	
+        
+        dpid = datapath.id
+        
         if dpid in self.mac_to_port:
                 if dst in self.mac_to_port[dpid]:
                     out_port = self.mac_to_port[dpid][dst]
@@ -98,11 +111,11 @@ class TrafficSlicing(app_manager.RyuApp):
                     self.add_flow(datapath, 1, match, actions)
                     self._send_package(msg, datapath, in_port, actions)
 
-
-
+                    
     def inserimento(self):
             active_slices = [False for _ in range(4)]
             while True:
+                time.sleep(1)
                 print("Inserisci: (es. ON 1, OFF 2)")
                 var = input()
                 splitString = var.split(" ")
